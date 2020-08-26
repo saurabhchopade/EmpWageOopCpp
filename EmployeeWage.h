@@ -5,7 +5,8 @@ using namespace std;
 class EmployeeWage{
 public:
     int getHour(int);
-    int calculateTotalWage();  
+    int calculateMonthlyWage();
+    bool checkMaxHoursReached(int); 
 };
 
 int EmployeeWage :: getHour(int status) {
@@ -28,7 +29,16 @@ int EmployeeWage :: getHour(int status) {
     return hour;
 }
 
-int EmployeeWage :: calculateTotalWage() {
+bool EmployeeWage :: checkMaxHoursReached(int totalHours) {
+    const int maxHours = 100; 
+    
+    if(totalHours >= maxHours) {
+         return true;
+    }    
+    return false;
+} 
+
+int EmployeeWage :: calculateMonthlyWage() {
     int hour, status;
     const int WAGE_PER_HOUR = 20;
 	const int WORKING_DAYS = 100;
@@ -36,7 +46,6 @@ int EmployeeWage :: calculateTotalWage() {
     int totalWage = 0,totalWorkHours = 0;
 
     srand(time(NULL));
-
     for(int day = 1; day <= WORKING_DAYS; day++) {
 	    status = ((1 + rand() % 3));
         hour = getHour(status); 
@@ -44,15 +53,10 @@ int EmployeeWage :: calculateTotalWage() {
 		totalWage += hour * WAGE_PER_HOUR;
 	    totalWorkHours += hour;
 
-        if(totalWorkHours == 100) {
+        if(checkMaxHoursReached(totalWorkHours)) {
             cout << "\nWage for month = " << totalWage;
             return 0;
         } 
     }
         return 0;
-}
-
-int main() {
-    EmployeeWage emp;
-    emp.calculateTotalWage();
 }
