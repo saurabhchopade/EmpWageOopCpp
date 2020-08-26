@@ -4,9 +4,10 @@ using namespace std;
 
 class EmployeeWage{
 public:
+
     int getHour(int);
-    int calculateMonthlyWage();
-    bool checkMaxHoursReached(int); 
+    int calculateMonthlyWage(string, int, int, int);
+    bool checkMaxHoursReached(int,int); 
 };
 
 int EmployeeWage :: getHour(int status) {
@@ -29,19 +30,17 @@ int EmployeeWage :: getHour(int status) {
     return hour;
 }
 
-bool EmployeeWage :: checkMaxHoursReached(int totalHours) {
-    const int maxHours = 100; 
-    
+bool EmployeeWage :: checkMaxHoursReached(int totalHours,int maxHours) {    
     if(totalHours >= maxHours) {
          return true;
     }    
     return false;
 } 
 
-int EmployeeWage :: calculateMonthlyWage() {
+int EmployeeWage :: calculateMonthlyWage(string companyName, int wagePerhour, int workingDays, int maxWorkHour) {
     int hour, status;
-    const int WAGE_PER_HOUR = 20;
-	const int WORKING_DAYS = 100;
+    const int WAGE_PER_HOUR = wagePerhour;
+	const int WORKING_DAYS = workingDays;
 	
     int totalWage = 0,totalWorkHours = 0;
 
@@ -53,8 +52,9 @@ int EmployeeWage :: calculateMonthlyWage() {
 		totalWage += hour * WAGE_PER_HOUR;
 	    totalWorkHours += hour;
 
-        if(checkMaxHoursReached(totalWorkHours)) {
-            cout << "\nWage for month = " << totalWage;
+        if(checkMaxHoursReached(totalWorkHours,maxWorkHour)) {
+            cout << "\nCompanyName = " << companyName;
+            cout << "\nWage for month = " << totalWage << endl;
             return 0;
         } 
     }
