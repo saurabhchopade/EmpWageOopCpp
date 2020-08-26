@@ -13,6 +13,7 @@ int main() {
 
 	for(int day = 1; day <= DAYS_IN_MONTH; day++) {
 		status = ((1 + rand() % 3));
+
 		switch(status) {
 			case IS_FULL_TIME :
 				hour = 8;
@@ -26,5 +27,5 @@ int main() {
 		}
 		totalWage += hour * WAGE_PER_HOUR;
 	}
-	cout << "\nWage for month = " << totalWage;
+	cout << " \nWage for a month = " << totalWage;
 }
