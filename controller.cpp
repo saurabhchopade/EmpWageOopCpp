@@ -3,9 +3,10 @@ class Input{
 public:
   
     void userInput() {
-        EmployeeWage emp;
-        emp.calculateMonthlyWage("Dmart", 20, 100, 100);
-        emp.calculateMonthlyWage("Kmart", 40, 50, 40);
+        EmployeeWage *apple = new EmployeeWage("Apple", 20, 100, 100);
+        apple->calculateMonthlyWage();
+        EmployeeWage *google = new EmployeeWage("Google", 40, 60, 50);
+        google->calculateMonthlyWage();
     }
 };
 int main() {
