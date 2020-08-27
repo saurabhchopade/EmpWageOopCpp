@@ -1,9 +1,10 @@
 #include <iostream>
 #include <time.h>
 #include "CompanyEmpWage.h"
+#include "IEmployeeWage.h"
 using namespace std;
 
-class EmployeeWage{
+class EmployeeWage : IEmployeeWage{
 public:
     int ratePerHour, maxWorkingDays, maxWorkingHours, totalWage, companyNo = 0;
 
