@@ -10,16 +10,11 @@ public:
     int ratePerHour, maxWorkingDays, maxWorkingHours, totalWage;
 
 	string company;
+   
     list <CompanyEmpWage> companyList; 
-    CompanyEmpWage *companyEmpWageArray;
-
 
     EmployeeWage(){}
- 
-    void setTotalWage(int totalWage) {
-        this->totalWage = totalWage;
-    }
- 
+
     int getHour(int);
     int calculateMonthlyWage(CompanyEmpWage);
     bool checkMaxHoursReached(int,int);     
@@ -39,7 +34,7 @@ int EmployeeWage :: addCompanyEmpWage( string companyName, int ratePerHour, int 
 void EmployeeWage :: computeEmpWage(){
   
     for (list<CompanyEmpWage>::iterator index = companyList.begin(); index != companyList.end();index++) {
-       setTotalWage(calculateMonthlyWage(*index));
+       index -> setTotalWage(calculateMonthlyWage(*index));
     } 
 }
       

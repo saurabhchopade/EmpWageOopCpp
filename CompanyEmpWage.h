@@ -5,8 +5,7 @@ public:
     int ratePerHour, maxWorkingDays, maxWorkingHours, totalWage;
 
 	string company;
-    CompanyEmpWage(){
-    }
+    CompanyEmpWage(){}
 
     CompanyEmpWage(string companyName,int ratePerHour,int  maxWorkingDays,int maxWorkHour){
         this->company = companyName;
