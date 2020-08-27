@@ -1,21 +1,20 @@
 #include <iostream>
 #include <time.h>
+#include <list> 
 #include "CompanyEmpWage.h"
 #include "IEmployeeWage.h"
 using namespace std;
 
 class EmployeeWage : IEmployeeWage{
 public:
-    int ratePerHour, maxWorkingDays, maxWorkingHours, totalWage, companyNo = 0;
+    int ratePerHour, maxWorkingDays, maxWorkingHours, totalWage;
 
 	string company;
-
+    list <CompanyEmpWage> companyList; 
     CompanyEmpWage *companyEmpWageArray;
 
 
-    EmployeeWage(){
-      companyEmpWageArray = new CompanyEmpWage[5];
-    }
+    EmployeeWage(){}
  
     void setTotalWage(int totalWage) {
         this->totalWage = totalWage;
@@ -27,23 +26,22 @@ public:
     int addCompanyEmpWage(string,int,int,int);
     void displayDetails(int,string);
     void computeEmpWage();
+    list<CompanyEmpWage>::iterator it = companyList.begin(); 
 };
 
 
 int EmployeeWage :: addCompanyEmpWage( string companyName, int ratePerHour, int  maxWorkingDays, int maxWorkHour){
-    
     CompanyEmpWage  companyEmpWage(companyName, ratePerHour,maxWorkingDays, maxWorkingHours);
-    companyEmpWageArray[companyNo] = companyEmpWage;
-    companyNo++;
+     companyList.insert(it,companyEmpWage);
     return 0;
 }
 
 void EmployeeWage :: computeEmpWage(){
-    cout << "I am here";
-		for(int i = 0; i < companyNo; i++){
-			companyEmpWageArray[i].setTotalWage(this->calculateMonthlyWage(companyEmpWageArray[i]));
-		}
-	}
+  
+    for (list<CompanyEmpWage>::iterator index = companyList.begin(); index != companyList.end();index++) {
+       setTotalWage(calculateMonthlyWage(*index));
+    } 
+}
       
 int EmployeeWage :: getHour(int status) {
     const  int IS_FULL_TIME = 1;
@@ -77,7 +75,7 @@ void EmployeeWage :: displayDetails(int totalWage, string company) {
     cout << "\nWage for month = " << totalWage << endl;
 }
 
-int EmployeeWage :: calculateMonthlyWage( CompanyEmpWage companyEmpWage) {
+int EmployeeWage :: calculateMonthlyWage(CompanyEmpWage companyEmpWage) {
     int hour, status;
     const int WAGE_PER_HOUR = companyEmpWage.ratePerHour;
 	const int WORKING_DAYS = companyEmpWage.maxWorkingDays;
